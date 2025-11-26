@@ -59,7 +59,6 @@ def results():
             flash('No room data provided. Please try again.', 'warning')
             return redirect(url_for('index'))
         
-        # Validate all inputs
         for i in range(number_of_data_sets):
             try:
                 length = float(request.form.get(f'length-{i}', 0))
@@ -89,6 +88,5 @@ def results():
         flash('An error occurred while processing your request. Please try again.', 'danger')
         return redirect(url_for('index'))
 
-# Boiler plate for starting the application
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=9200, debug=True)

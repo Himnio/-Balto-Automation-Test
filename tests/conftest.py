@@ -29,3 +29,4 @@ def client(app):
 def runner(app):
     """Create a test CLI runner for the Flask app."""
     return app.test_cli_runner()
+    
