@@ -1,48 +1,90 @@
-## Synopsis
+## Prerequisites
 
-The **Paint Calculator** is a hypothetical project that calculates how many gallons of paint would be required to paint a number of rooms.
+- Python 3.8+
+- pip (Python package installer)
 
-## Requirements
+## Installation
 
-* Python 3
-* Pip
+1. **Create and activate a virtual environment** (recommended):
+   ```bash
+   # Create a virtual environment
+   python -m venv venv or use python3 -m venv venv
+   
+   # Activate the virtual environment
+   # On macOS/Linux:
+   source venv/bin/activate
+   # On Windows:
+   # .\venv\Scripts\activate
+   ```
 
-## What we're looking for
+2. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-* Install Python / Pip
-* Run application
-* Write unit tests against the application.
-* Write playwright E2E tests against the application
-* You are allowed to change any of the source code as you see fit to make things easier for yourself. You are encouraged to fix any bugs you discover.
-* Explain any problems you had while writing the tests, and what you did to make it easier. Pointing to localhost for the application is OK.
+## Running the Application
 
-## Instructions
+1. **Start the development server**:
+   ```bash
+   python3 paint_calculator/run.py
+   ```
 
-Because each applicant's code should be secret from one another, we should not submit it to the same repo.
-
-1. Clone the repo (do not fork)
-2. Create a new public repo on Github
-3. Add the new repo as a new remote
-* `git remote add acme <url>`
-4. Initialize the new repo with what is cloned
-* `git push acme master`
-5. Create a new branch off of master to put your changes on
-6. Run the application locally
-* `pip3 install -e .`
-* `python3 paint_calculator/run.py`
-7. Perform testing and debugging activities
-
-## Submitting 
-
-To make it easier on everybody, it's best if we use a PR to diff what work was completed.
-
-1. Make any and all commits to your new branch and push the changes
-* `git push acme <branch>`
-2. Create a PR to your new repo
-3. Make sure you include your test plan and any automated tests, as well as update this README to instruct someone on how to run the tests
-4. Include any other text in a file - which tests would be suited for a different level of execution, or any problems encountered...etc
-5. Send the link to the PR
+2. Open your browser and navigate to:
+   ```
+   http://localhost:9200
+   ```
 
 ## Running Tests
 
-Write instructions for how a user executes the automated tests you created.
+1. **Unit Tests**:
+   ```bash
+   pytest tests/unit/
+   ```
+
+2. **End-to-End Tests**:
+   ```bash
+   pytest tests/e2e/
+   ```
+
+## Common Issues and Solutions
+
+### 1. Secret Key Error
+**Error**: `RuntimeError: The session is unavailable because no secret key was set`
+
+**Solution**:
+- Create a `.env` file in the project root
+- Add `FLASK_SECRET_KEY=your-secret-key-here`
+- Make sure `python-dotenv` is installed and properly loading the environment variables
+
+### 2. Home Button Not Redirecting
+**Issue**: The home button on the results page wasn't working due to incorrect form method.
+
+**Solution**:
+- Changed form method from `post` to `get` in `results.html`
+
+### 3. Dependency Issues
+If you encounter dependency conflicts:
+1. Make sure you're using a virtual environment
+2. Try updating pip: `pip install --upgrade pip`
+3. Reinstall requirements: `pip install -r requirements.txt --force-reinstall`
+
+### 4. CSRF Issues 
+solution - For testing csrf issues is to disable it in the config file
+
+## Project Structure
+
+```
+Balto-automation-test/
+├── paint_calculator/
+│   ├── __init__.py
+│   ├── run.py          # Main application file
+│   ├── api.py          # API endpoints and calculations
+│   └── config.py       # Configuration settings
+├── tests/
+│   ├── unit/           # Unit tests
+│   └── e2e/            # End-to-end tests
+├── templates/          # HTML templates
+├── .env.example       # Example environment variables
+├── requirements.txt   # Project dependencies
+└── README.md          # This file
+```
